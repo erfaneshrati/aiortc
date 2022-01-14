@@ -103,7 +103,7 @@ class H264PayloadDescriptor:
 
 class H264Decoder(Decoder):
     def __init__(self) -> None:
-        self.codec = av.CodecContext.create("h264", "r")
+        self.codec = av.CodecContext.create("h264_cuvid", "r")
 
     def decode(self, encoded_frame: JitterFrame) -> List[Frame]:
         try:
@@ -143,7 +143,7 @@ class H264Encoder(Encoder):
     def __init__(self) -> None:
         self.buffer_data = b""
         self.buffer_pts: Optional[int] = None
-        self.codec: Optional[av.CodecContext] = None
+        self.codec: Optional[av.CodecContext] = av.CodecContext.create("h264_cuvid", "r")
         self.codec_buffering = False
         self.__target_bitrate = DEFAULT_BITRATE
 
